@@ -1,0 +1,242 @@
+@import "tailwindcss";
+
+:root {
+  /* Warm Paper Ivory & Botanical Ink Palette */
+  --bg-paper: #F6F3EC;
+  --bg-parchment: #EDE8DC;
+  --bg-linen: #E3DDD0;
+  --bg-canopy: #1B2A21;
+  --bg-canopy-elevated: #23352A;
+
+  --ink-primary: #16211A;
+  --ink-secondary: #433E37;
+  --ink-muted: #5C574E;
+
+  --canopy-text-primary: #F4F0E6;
+  --canopy-text-secondary: #C8D3C9;
+  --canopy-text-muted: #9BAFA0;
+
+  --accent-botanical: #284734;
+  --accent-botanical-hover: #1E3728;
+  --accent-sage: #6F8271;
+  --accent-terracotta: #8C4A32;
+  --accent-ochre: #7C5D2A;
+
+  --border-hairline: #D5CEBF;
+  --border-strong: #B8AF9D;
+  --border-canopy: #314739;
+
+  /* Typography */
+  --font-serif: 'EB Garamond', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* Easing curves (Emil Kowalski design engineering standard) */
+  --ease-out-quart: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out-quart: cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  background-color: var(--bg-paper);
+  color: var(--ink-primary);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  caret-color: var(--accent-botanical);
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg-paper);
+  color: var(--ink-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Browser Surface Theming */
+::selection {
+  background-color: #284734;
+  color: #F6F3EC;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-parchment);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #B8AF9D;
+  border: 2px solid var(--bg-parchment);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-sage);
+}
+
+/* Accessible Focus Rings */
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-botanical);
+  outline-offset: 2px;
+}
+
+/* Skip Link for Keyboard Users */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  z-index: 100;
+  background-color: var(--bg-canopy);
+  color: var(--canopy-text-primary);
+  padding: 0.625rem 1rem;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid var(--border-canopy);
+  transition: top 160ms var(--ease-out-quart);
+}
+
+.skip-link:focus-visible {
+  top: 1rem;
+  outline: 2px solid var(--canopy-text-primary);
+}
+
+/* Editorial Typography Helpers */
+.font-editorial {
+  font-family: var(--font-serif);
+}
+
+.font-ui {
+  font-family: var(--font-sans);
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.12;
+  text-wrap: balance;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+.prose-measure {
+  max-width: 68ch;
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+.binomial {
+  font-family: var(--font-serif);
+  font-style: italic;
+}
+
+/* Links & Interactive Controls */
+.editorial-link {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  text-decoration-color: var(--accent-sage);
+  transition: color 160ms var(--ease-out-quart), text-decoration-color 160ms var(--ease-out-quart);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .editorial-link:hover {
+    color: var(--accent-botanical);
+    text-decoration-color: var(--accent-botanical);
+  }
+}
+
+.btn-press {
+  transition:
+    transform 150ms var(--ease-out-quart),
+    background-color 180ms var(--ease-out-quart),
+    border-color 180ms var(--ease-out-quart),
+    color 180ms var(--ease-out-quart);
+}
+
+.btn-press:active {
+  transform: scale(0.98);
+}
+
+/* Subtle Image Plate Treatment */
+.plate-frame {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--bg-parchment);
+}
+
+.plate-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 550ms var(--ease-out-quart), opacity 350ms var(--ease-out-quart);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .plate-group:hover .plate-image {
+    transform: scale(1.025);
+  }
+}
+
+/* Entry Reveal */
+@keyframes plateReveal {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.reveal-entry {
+  animation: plateReveal 380ms var(--ease-out-quart) both;
+}
+
+/* Reduced Motion Compliance */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .plate-group:hover .plate-image {
+    transform: none;
+  }
+
+  .btn-press:active {
+    transform: none;
+  }
+}
+
